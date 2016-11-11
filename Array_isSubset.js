@@ -14,7 +14,6 @@
 
     Output:
       False
-  
 */
 
 function isSubset (array, sub) {
