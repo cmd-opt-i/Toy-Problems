@@ -1,44 +1,33 @@
 /*
-  Create a function that takes two arrays and determine whether the second array is a subset of the first array. Arrays will only contain primitive values.
+  Given a single input string, write a function that produces all possible anagrams of a string and outputs them as an array.
 
-  Ex. 1:
-    Input: 
-      isSubset ( [1,2,3,4], [3,4] );
+  Input:
+    "abc"
 
-    Output:
-      True
-      
-  Ex. 2:
-    Input: 
-      isSubset ( [1,2,3,4], [3,4,5] );
-
-    Output:
-      False
-  
+  Output:
+    [ "abc", "acb", "bac", "bca", "cab", "cba" ]
 */
 
-function isSubset (array, sub) {
-  // Edge cases
-  if (!Array.isArray(array) || !Array.isArray(sub)) { return false; }
-  if (array.length < sub.length) { return false; }
-  if (sub.length === 0) { return true; }
+function allAnagrams (string) {
+  var anagrams = [];
 
-  var keys = {};
+  function findAllAnagrams(letters, string) {
+    // adding to a set so we dont get duplicates
+    if (letters.length === 0) {
+      anagrams[string] = true;
+      return;
+    }
   
-  // Save all chars from the 'array' into a set
-  for (var i = 0; i < array.length; i++) {
-    keys[array[i]] = array[i]; 
-  }
+    for (var i = 0; i < letters.length; i++) {
+      var letter = letters[i];
+      var newString = string + letter;
+      var newLetters = letters.slice(0, i) + letters.slice(i+1);
 
-  // Compare chars from 'sub' array from 'keys'
-  // if any are found delete else not a subset
-  for (var i = 0; i < sub.length; i++) {
-    if (keys[sub[i]] === sub[i]) {
-      delete keys[sub[i]];
-    } else {
-      return false;
+      findAllAnagrams(newLetters, newString);
     }
   }
 
-  return true;
+  findAllAnagrams(string, '');
+  
+  return Object.keys(anagrams);
 }
