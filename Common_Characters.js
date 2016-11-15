@@ -12,25 +12,25 @@
 */
 
 commonCharacters = function(string1, string2){
-  var set1 = {}, set2 = {};
-  for (var i = 0; i < string1.length; i++) {
-    set1[string1[i]] = i;
+  var ref = {};
+  var results = '';
+  
+  // save string1 chars into set
+  for (var i = 0; i < string2.length; i++){
+    ref[string2[i]] = false;
   }
-  for (var i = 0; i < string2.length; i++) {
-    if (set1[string2[i]]) {
-      set2[string2[i]] = set1[i]
+  
+  // removes spaces
+  ref[' '] = null;
+  
+  // find matching chars from ref and string1
+  // concat matches onto results string
+  for (var i = 0; i < string1.length; i++){
+    if (ref[string1[i]] === false) {
+      ref[string1[i]] = true;
+      results += string1[i];
     }
   }
-  // check values.. 
-  // var sortedString = Object.keys(set2).sort(function(a, b) {
-  //   if (a < b) {
-  //     return -1;
-  //   }
-  //   if (a > b) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // });
   
-  return sortedString;  
+  return results;
 };
