@@ -12,3 +12,39 @@
   Output:
     3
 */
+
+function binarySearch (array, target) {
+ var result = -1;
+ var start = 0;
+ var end = array.length - 1;
+
+ function find (left, right) {
+    var midIndex = Math.round((right + left) / 2);
+
+    // 'left' & 'right' come to the same index or overlap
+    if (right <= left) {
+      // check if value at index is target
+      if (array[left] === target) {
+       result = left;
+      }
+      return;
+    }
+
+    // check if current middle index is 'target'
+    if (array[midIndex] === target) {
+      result = midIndex;
+      return;
+    }
+
+    // check if value at middle index is < or > than 'target'
+    if (array[midIndex] > target) {
+      find(left, midIndex - 1);
+    }
+    if (array[midIndex] < target) {
+      find(midIndex + 1, right);
+    }
+ }
+ 
+ find(start, end);
+ return result;
+}
