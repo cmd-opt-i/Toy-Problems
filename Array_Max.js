@@ -7,3 +7,19 @@
   Output:
     30
 */
+
+function max (numbers) {
+  var largest = null;
+  
+  for (var i= 0; i < numbers.length; i++) {
+    if (largest === null) {
+      largest = numbers[i]
+    } 
+    
+    if (numbers[i] > largest) {
+      largest = numbers[i]
+    }
+  }
+  
+  return largest;
+}
