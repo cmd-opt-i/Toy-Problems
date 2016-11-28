@@ -23,3 +23,9 @@ function max (numbers) {
   
   return largest;
 }
+
+function max (numbers) {
+  return numbers.reduce(function(a, b) {
+    return (b > a) ? b : a;
+  });
+}
